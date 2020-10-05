@@ -23,6 +23,15 @@ class CreateBiditems extends AbstractMigration
             'limit' => 100,
             'null' => false,
         ]);
+        $table->addColumn('detail', 'varchar',[
+            'default' => null,
+            'limit' => 1000,
+            'null' => false,
+        ]);
+        $table->addColumn('image_path', 'varchar',[
+            'default' => null,
+            'limit' => 100,
+        ]);
         $table->addColumn('finished', 'boolean', [
             'default' => null,
             'null' => false,
