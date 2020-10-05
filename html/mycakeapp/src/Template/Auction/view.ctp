@@ -13,6 +13,10 @@
 	<td><?= $this->Number->format($biditem->id) ?></td>
 </tr>
 <tr>
+	<th scope="row">商品詳細</th>
+	<td><pre><?= h($biditem->detail) ?></pre></td>
+</tr>
+<tr>
 	<th scope="row">終了時間</th>
 	<td><?= h($biditem->endtime) ?></td>
 </tr>
