@@ -80,6 +80,12 @@ class BiditemsTable extends Table
             ->notEmptyString('detail');
 
         $validator
+            ->scalar('image_path')
+            ->maxlength('image_path', 100)
+            ->requirePresence('image_path', 'update')
+            ->notEmptyString('image_path');
+
+            $validator
             ->boolean('finished')
             ->requirePresence('finished', 'create')
             ->notEmptyString('finished');
@@ -88,7 +94,7 @@ class BiditemsTable extends Table
             ->dateTime('endtime')
             ->requirePresence('endtime', 'create')
             ->notEmptyDateTime('endtime');
-
+            
         return $validator;
     }
 
