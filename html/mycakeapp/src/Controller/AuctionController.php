@@ -87,18 +87,18 @@ class AuctionController extends AuctionBaseController
 		// POST送信時の処理
 		if ($this->request->is('post')) {
 			// アップロードを許可する拡張子を用意
-			$extensions = array('jpg', 'jpeg', 'png', 'gif', 'JPG', 'JPEG', 'PNG', 'GIF');
+			$allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
 			// アップロードファイルの拡張子取得
-			$getExtension = pathinfo($_FILES['image']['name'] , PATHINFO_EXTENSION);
-			if(in_array($getExtension, $extensions, true)){
+			$fileExtension = pathinfo($_FILES['image']['name'] , PATHINFO_EXTENSION);
+			if(in_array(strtolower($fileExtension), $allowedExtensions, true)){
 				// $biditemにフォームの送信内容を反映
 				$biditem = $this->Biditems->patchEntity($biditem, $this->request->getData());
 				// tmp.拡張子で仮置き
-				$biditem['image_path'] = "tmp.".$getExtension;
+				$biditem['image_path'] = "tmp.".$fileExtension;
 				// $biditemを保存する
 				if($this->Biditems->save($biditem)){
 					// biditem idに名前を変更し拡張子は保持する
-					$image_path = $biditem['id'].'.'.$getExtension;
+					$image_path = "{$biditem['id']}.{$fileExtension}";
 					$biditem['image_path'] = $image_path;
 					move_uploaded_file($_FILES['image']['tmp_name'], 'img/auction/'.$image_path);
 					if ($this->Biditems->save($biditem)) {

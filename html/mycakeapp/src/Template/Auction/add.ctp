@@ -7,7 +7,7 @@
 		echo '<p><strong>USER: ' . $authuser['username'] . '</strong></p>';
 		echo $this->Form->control('name');
 		echo $this->Form->control('detail', ['type' => 'textarea']);
-		echo $this->Form->file('image', ['type' => 'file']);
+		echo $this->Form->file('image', ['type' => 'file', 'required'=>true]);
 		echo $this->Form->hidden('finished', ['value' => 0]);
 		echo $this->Form->control('endtime');
 	?>

@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<th scope="row">商品画像</th>
-	<td><?= $this->Html->image('auction/'.$biditem->image_path, array('height'=>150, 'width'=>150))?></td>
+	<td><?= $this->Html->image('auction/' . h($biditem->image_path), array('height'=>150, 'width'=>150))?></td>
 </tr>
 </table>
 <div class="related">

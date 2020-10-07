@@ -82,10 +82,10 @@ class BiditemsTable extends Table
         $validator
             ->scalar('image_path')
             ->maxlength('image_path', 100)
-            ->requirePresence('image_path', 'update')
+            ->requirePresence('image_path', 'create')
             ->notEmptyString('image_path');
 
-            $validator
+        $validator
             ->boolean('finished')
             ->requirePresence('finished', 'create')
             ->notEmptyString('finished');
