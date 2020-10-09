@@ -5,6 +5,7 @@
 /logs/*
 /tmp/*
 /vendor/*
+/webroot/img/acution/*
 
 # OS generated files #
 ######################

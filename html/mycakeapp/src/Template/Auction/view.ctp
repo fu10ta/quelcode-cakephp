@@ -13,6 +13,10 @@
 	<td><?= $this->Number->format($biditem->id) ?></td>
 </tr>
 <tr>
+	<th scope="row">商品詳細</th>
+	<td><pre><?= h($biditem->detail) ?></pre></td>
+</tr>
+<tr>
 	<th scope="row">終了時間</th>
 	<td><?= h($biditem->endtime) ?></td>
 </tr>
@@ -23,6 +27,10 @@
 <tr>
 	<th scope="row"><?= __('終了した？') ?></th>
 	<td><?= $biditem->finished ? __('Yes') : __('No'); ?></td>
+</tr>
+<tr>
+	<th scope="row">商品画像</th>
+	<td><?= $this->Html->image('auction/' . h($biditem->image_path), array('height'=>150, 'width'=>150))?></td>
 </tr>
 </table>
 <div class="related">
