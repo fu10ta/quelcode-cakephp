@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bidinfo $bidinfo
@@ -45,31 +46,31 @@
     </table>
     <div class="related">
         <h4><?= __('Related Bidmessages') ?></h4>
-        <?php if (!empty($bidinfo->bidmessages)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Bidinfo Id') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col"><?= __('Message') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($bidinfo->bidmessages as $bidmessages): ?>
-            <tr>
-                <td><?= h($bidmessages->id) ?></td>
-                <td><?= h($bidmessages->bidinfo_id) ?></td>
-                <td><?= h($bidmessages->user_id) ?></td>
-                <td><?= h($bidmessages->message) ?></td>
-                <td><?= h($bidmessages->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Bidmessages', 'action' => 'view', $bidmessages->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Bidmessages', 'action' => 'edit', $bidmessages->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Bidmessages', 'action' => 'delete', $bidmessages->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bidmessages->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
+        <?php if (!empty($bidinfo->bidmessages)) : ?>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <th scope="col"><?= __('Id') ?></th>
+                    <th scope="col"><?= __('Bidinfo Id') ?></th>
+                    <th scope="col"><?= __('User Id') ?></th>
+                    <th scope="col"><?= __('Message') ?></th>
+                    <th scope="col"><?= __('Created') ?></th>
+                    <th scope="col" class="actions"><?= __('Actions') ?></th>
+                </tr>
+                <?php foreach ($bidinfo->bidmessages as $bidmessages) : ?>
+                    <tr>
+                        <td><?= h($bidmessages->id) ?></td>
+                        <td><?= h($bidmessages->bidinfo_id) ?></td>
+                        <td><?= h($bidmessages->user_id) ?></td>
+                        <td><?= h($bidmessages->message) ?></td>
+                        <td><?= h($bidmessages->created) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['controller' => 'Bidmessages', 'action' => 'view', $bidmessages->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['controller' => 'Bidmessages', 'action' => 'edit', $bidmessages->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Bidmessages', 'action' => 'delete', $bidmessages->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bidmessages->id)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
         <?php endif; ?>
     </div>
 </div>

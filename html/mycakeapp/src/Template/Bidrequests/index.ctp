@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bidrequest[]|\Cake\Collection\CollectionInterface $bidrequests
@@ -28,19 +29,19 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($bidrequests as $bidrequest): ?>
-            <tr>
-                <td><?= $this->Number->format($bidrequest->id) ?></td>
-                <td><?= $bidrequest->has('biditem') ? $this->Html->link($bidrequest->biditem->name, ['controller' => 'Biditems', 'action' => 'view', $bidrequest->biditem->id]) : '' ?></td>
-                <td><?= $bidrequest->has('user') ? $this->Html->link($bidrequest->user->id, ['controller' => 'Users', 'action' => 'view', $bidrequest->user->id]) : '' ?></td>
-                <td><?= $this->Number->format($bidrequest->price) ?></td>
-                <td><?= h($bidrequest->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $bidrequest->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bidrequest->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bidrequest->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bidrequest->id)]) ?>
-                </td>
-            </tr>
+            <?php foreach ($bidrequests as $bidrequest) : ?>
+                <tr>
+                    <td><?= $this->Number->format($bidrequest->id) ?></td>
+                    <td><?= $bidrequest->has('biditem') ? $this->Html->link($bidrequest->biditem->name, ['controller' => 'Biditems', 'action' => 'view', $bidrequest->biditem->id]) : '' ?></td>
+                    <td><?= $bidrequest->has('user') ? $this->Html->link($bidrequest->user->id, ['controller' => 'Users', 'action' => 'view', $bidrequest->user->id]) : '' ?></td>
+                    <td><?= $this->Number->format($bidrequest->price) ?></td>
+                    <td><?= h($bidrequest->created) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $bidrequest->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bidrequest->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bidrequest->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bidrequest->id)]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bidrequest $bidrequest
@@ -12,7 +13,7 @@
                 ['action' => 'delete', $bidrequest->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $bidrequest->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Bidrequests'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Biditems'), ['controller' => 'Biditems', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Biditem'), ['controller' => 'Biditems', 'action' => 'add']) ?></li>
@@ -25,9 +26,9 @@
     <fieldset>
         <legend><?= __('Edit Bidrequest') ?></legend>
         <?php
-            echo $this->Form->control('biditem_id', ['options' => $biditems]);
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('price');
+        echo $this->Form->control('biditem_id', ['options' => $biditems]);
+        echo $this->Form->control('user_id', ['options' => $users]);
+        echo $this->Form->control('price');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

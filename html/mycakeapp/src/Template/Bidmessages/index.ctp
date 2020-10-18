@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bidmessage[]|\Cake\Collection\CollectionInterface $bidmessages
@@ -25,18 +26,18 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($bidmessages as $bidmessage): ?>
-            <tr>
-                <td><?= $this->Number->format($bidmessage->id) ?></td>
-                <td><?= $this->Number->format($bidmessage->bidinfo_id) ?></td>
-                <td><?= $bidmessage->has('user') ? $this->Html->link($bidmessage->user->id, ['controller' => 'Users', 'action' => 'view', $bidmessage->user->id]) : '' ?></td>
-                <td><?= h($bidmessage->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $bidmessage->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bidmessage->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bidmessage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bidmessage->id)]) ?>
-                </td>
-            </tr>
+            <?php foreach ($bidmessages as $bidmessage) : ?>
+                <tr>
+                    <td><?= $this->Number->format($bidmessage->id) ?></td>
+                    <td><?= $this->Number->format($bidmessage->bidinfo_id) ?></td>
+                    <td><?= $bidmessage->has('user') ? $this->Html->link($bidmessage->user->id, ['controller' => 'Users', 'action' => 'view', $bidmessage->user->id]) : '' ?></td>
+                    <td><?= h($bidmessage->created) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $bidmessage->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bidmessage->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bidmessage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bidmessage->id)]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

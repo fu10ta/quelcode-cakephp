@@ -94,7 +94,7 @@ class BiditemsTable extends Table
             ->dateTime('endtime')
             ->requirePresence('endtime', 'create')
             ->notEmptyDateTime('endtime');
-            
+
         return $validator;
     }
 
