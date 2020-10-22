@@ -54,6 +54,9 @@ class BidinfoTable extends Table
         $this->hasMany('Bidmessages', [
             'foreignKey' => 'bidinfo_id',
         ]);
+        $this->hasMany('Ratings', [
+            'foreignKey' => 'bidinfo_id',
+        ]);
     }
 
     /**
@@ -72,6 +75,49 @@ class BidinfoTable extends Table
             ->integer('price')
             ->requirePresence('price', 'create')
             ->notEmptyString('price');
+
+        $validator
+            ->scalar('buyer_name')
+            ->allowEmptyString('buer_name', 'create')
+            ->notEmptyString('buyer_name', 'update')
+            ->requirePresence('buyer_name', 'update')
+            ->maxLength('buyer_name', 255);
+
+        $validator
+            ->scalar('buyer_address')
+            ->allowEmptyString('buyer_address', 'create')
+            ->notEmptyString('buyer_address', 'update')
+            ->requirePresence('buyer_address', 'update')
+            ->maxLength('buyer_address', 255);
+
+        $validator
+            ->scalar('buyer_phone_number')
+            ->allowEmptyString('buyer_phone_number', 'create')
+            ->notEmptyString('buyer_phone_number', 'update')
+            ->requirePresence('buyer_phone_number', 'update')
+            ->regex('buyer_phone_number', '/^[0][0-9\-]{10,12}/', '半角数字とハイフンのみで入力してください')
+            ->minLength('buyer_phone_number', 10, '半角数字とハイフンのみで10文字以上13文字以内で入力してください')
+            ->maxLength('buyer_phone_number', 13, '半角数字とハイフンのみで10文字以上13文字以内で入力してください');
+
+        $validator
+            ->boolean('is_sent')
+            ->requirePresence('is_sent', 'create')
+            ->notEmptyString('is_sent', 'create');
+
+        $validator
+            ->boolean('is_received')
+            ->requirePresence('is_recieved', 'create')
+            ->notEmptyString('is_received', 'create');
+
+        $validator
+            ->boolean('is_seller_rated')
+            ->requirePresence('is_seller_rated', 'create')
+            ->notEmptyString('is_seller_rated', 'create');
+
+        $validator
+            ->boolean('is_buyer_rated')
+            ->requirePresence('is_buyer_rated', 'create')
+            ->notEmptyString('is_buyer_rated', 'create');
 
         return $validator;
     }

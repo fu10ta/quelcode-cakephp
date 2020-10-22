@@ -36,5 +36,12 @@ class Bidinfo extends Entity
         'biditem' => true,
         'user' => true,
         'bidmessages' => true,
+        'buyer_name' => true,
+        'buyer_address' => true,
+        'buyer_phone_number' => true,
+        'is_sent' => true,
+        'is_received' => true,
+        'is_seller_rated' => true,
+        'is_buyer_rated' => true
     ];
 }
