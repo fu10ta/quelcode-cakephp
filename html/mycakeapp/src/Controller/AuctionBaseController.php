@@ -78,7 +78,7 @@ class AuctionBaseController extends AppController
 		}
 		// 一般ユーザーはAuctionControllerのみtrue、他はfalse
 		if ($user['role'] === 'user') {
-			if ($this->name == 'Auction') {
+			if ($this->name == 'Auction' || 'Ratings') {
 				return true;
 			} else {
 				return false;

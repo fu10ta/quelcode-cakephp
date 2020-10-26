@@ -1,16 +1,12 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Rating[]|\Cake\Collection\CollectionInterface $ratings
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Rating'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
 <div class="ratings index large-9 medium-8 columns content">
+    <h3>Rating AVG : <?= $ratingAvg ?></h3>
     <h3><?= __('Ratings') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
@@ -26,19 +22,19 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($ratings as $rating): ?>
-            <tr>
-                <td><?= $this->Number->format($rating->id) ?></td>
-                <td><?= $this->Number->format($rating->bidinfo_id) ?></td>
-                <td><?= $this->Number->format($rating->target_id) ?></td>
-                <td><?= $this->Number->format($rating->scorer_id) ?></td>
-                <td><?= $this->Number->format($rating->rating) ?></td>
-                <td><?= h($rating->comment) ?></td>
-                <td><?= h($rating->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $rating->id]) ?>
-                </td>
-            </tr>
+            <?php foreach ($ratings as $rating) : ?>
+                <tr>
+                    <td><?= $this->Number->format($rating->id) ?></td>
+                    <td><?= $this->Number->format($rating->bidinfo_id) ?></td>
+                    <td><?= $this->Number->format($rating->target_id) ?></td>
+                    <td><?= $this->Number->format($rating->scorer_id) ?></td>
+                    <td><?= $this->Number->format($rating->rating) ?></td>
+                    <td><?= h($rating->comment) ?></td>
+                    <td><?= h($rating->created) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $rating->bidinfo_id]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

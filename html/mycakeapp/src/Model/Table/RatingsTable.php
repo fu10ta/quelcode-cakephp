@@ -60,6 +60,18 @@ class RatingsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
+            ->integer('bidinfo_id')
+            ->requirePresence('bidinfo_id', 'create');
+
+        $validator
+            ->integer('target_id')
+            ->requirePresence('target_id', 'create');
+
+        $validator
+            ->integer('scorer_id')
+            ->requirePresence('scorer_id', 'create');
+
+        $validator
             ->decimal('rating')
             ->requirePresence('rating', 'create')
             ->notEmptyString('rating');

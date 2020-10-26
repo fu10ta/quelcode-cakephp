@@ -213,12 +213,18 @@ class AuctionController extends AuctionBaseController
 			'contain' => ['Biditems']
 		]);
 
+		//ログインユーザーの認証
+		if ($this->Auth->user('id') !== $bidinfo->user_id && $this->Auth->user('id') !== $bidinfo->biditem->user_id) {
+			return $this->redirect(['action' => 'index']);
+		}
+
 		//フォームからの情報で取引情報を更新
 		if ($this->request->is('post')) :
 			if (isset($_POST['buyer_name'])) :
-				$bidinfo->buyer_name = $_POST['buyer_name'];
-				$bidinfo->buyer_address = $_POST['buyer_address'];
-				$bidinfo->buyer_phone_number = $_POST['buyer_phone_number'];
+				$bidinfoPatchData['buyer_name'] = $_POST['buyer_name'];
+				$bidinfoPatchData['buyer_address'] = $_POST['buyer_address'];
+				$bidinfoPatchData['buyer_phone_number'] = $_POST['buyer_phone_number'];
+				$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $bidinfoPatchData);
 			elseif (isset($_POST['is_sent'])) :
 				$bidinfo->is_sent = 1;
 			elseif (isset($_POST['is_received'])) :
@@ -245,7 +251,8 @@ class AuctionController extends AuctionBaseController
 			else :
 				//評価画面への遷移
 				$this->Auth->setUser($this->Auth->user());
-				return $this->redirect(['controller' => 'Ratings', 'action' => 'add']);
+				$bidinfo_id = $bidinfo->id;
+				return $this->redirect(['controller' => 'Ratings', 'action' => 'add', $bidinfo_id]);
 			endif;
 		elseif ($this->Auth->user('id') === $bidinfo->biditem->user_id) :
 			//case seller
@@ -262,10 +269,8 @@ class AuctionController extends AuctionBaseController
 			else :
 				//評価画面への遷移
 				$this->Auth->setUser($this->Auth->user());
-				return $this->redirect(['controller' => 'Ratings', 'action' => 'add']);
+				return $this->redirect(['controller' => 'Ratings', 'action' => 'add', $bidinfo_id]);
 			endif;
-		else :
-			return $this->redirect(['action' => 'index']);
 		endif;
 		$this->set(compact('bidinfo', 'msg'));
 	}
