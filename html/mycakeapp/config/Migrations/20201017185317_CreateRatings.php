@@ -32,8 +32,8 @@ class CreateRatings extends AbstractMigration
         $table->addColumn('rating', 'decimal', [
             'default' => null,
             'null' => false,
-            'precision' => 10,
-            'scale' => 5,
+            'precision' => 1,
+            'scale' => 0,
         ]);
         $table->addColumn('comment', 'string', [
             'default' => null,
