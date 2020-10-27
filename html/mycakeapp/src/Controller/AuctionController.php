@@ -220,14 +220,14 @@ class AuctionController extends AuctionBaseController
 
 		//フォームからの情報で取引情報を更新
 		if ($this->request->is('post')) :
-			if (isset($_POST['buyer_name'])) :
+			if (isset($_POST['buyer_name']) && !isset($bidinfo->buyer_name) && $this->Auth->user('id') === $bidinfo->user_id) :
 				$bidinfoPatchData['buyer_name'] = $_POST['buyer_name'];
 				$bidinfoPatchData['buyer_address'] = $_POST['buyer_address'];
 				$bidinfoPatchData['buyer_phone_number'] = $_POST['buyer_phone_number'];
 				$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $bidinfoPatchData);
-			elseif (isset($_POST['is_sent'])) :
+			elseif (isset($_POST['is_sent']) && $this->Auth->user('id') === $bidinfo->biditem->user_id) :
 				$bidinfo->is_sent = 1;
-			elseif (isset($_POST['is_received'])) :
+			elseif (isset($_POST['is_received']) && $this->Auth->user('id') === $bidinfo->user_id) :
 				$bidinfo->is_received = 1;
 			endif;
 			if ($this->Bidinfo->save($bidinfo)) :
