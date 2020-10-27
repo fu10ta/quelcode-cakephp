@@ -32,6 +32,7 @@
 			<?php endif; ?>
 		</tbody>
 	</table>
+	<a href="<?= $this->Url->build(['action' => 'personalInfo', $bidinfo->id]) ?>">取引連絡ページへ＞</a>
 <?php else : ?>
 	<h2>※落札情報はありません。</h2>
 <?php endif; ?>

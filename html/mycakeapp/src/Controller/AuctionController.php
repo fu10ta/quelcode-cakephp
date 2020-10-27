@@ -204,4 +204,74 @@ class AuctionController extends AuctionBaseController
 		])->toArray();
 		$this->set(compact('biditems'));
 	}
+
+	//発送・受取連絡の表示
+	public function personalInfo($bidinfo_id)
+	{
+		//取引情報の取得
+		$bidinfo = $this->Bidinfo->get($bidinfo_id, [
+			'contain' => ['Biditems']
+		]);
+
+		//ログインユーザーの認証
+		if ($this->Auth->user('id') !== $bidinfo->user_id && $this->Auth->user('id') !== $bidinfo->biditem->user_id) {
+			return $this->redirect(['action' => 'index']);
+		}
+
+		//フォームからの情報で取引情報を更新
+		if ($this->request->is('post')) :
+			if (isset($_POST['buyer_name'])) :
+				$bidinfoPatchData['buyer_name'] = $_POST['buyer_name'];
+				$bidinfoPatchData['buyer_address'] = $_POST['buyer_address'];
+				$bidinfoPatchData['buyer_phone_number'] = $_POST['buyer_phone_number'];
+				$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $bidinfoPatchData);
+			elseif (isset($_POST['is_sent'])) :
+				$bidinfo->is_sent = 1;
+			elseif (isset($_POST['is_received'])) :
+				$bidinfo->is_received = 1;
+			endif;
+			if ($this->Bidinfo->save($bidinfo)) :
+				$this->Flash->success(__('保存しました'));
+			else :
+				$this->Flash->error(__('保存に失敗しました。もう一度入力ください'));
+			endif;
+		endif;
+
+		if ($this->Auth->user('id') === $bidinfo->user_id) :
+			//case buyer
+			if (empty($bidinfo->buyer_name)) :
+				//フォーム未入力
+				$msg = '発送先情報を入力してください';
+			elseif (!$bidinfo->is_sent) :
+				//発送連絡待ち
+				$msg = '出品者による送付連絡をお待ちください';
+			elseif (!$bidinfo->is_received) :
+				//受取連絡待ち
+				$msg = '商品受取後受取連絡ボタンを押してください';
+			else :
+				//評価画面への遷移
+				$this->Auth->setUser($this->Auth->user());
+				$bidinfo_id = $bidinfo->id;
+				return $this->redirect(['controller' => 'Ratings', 'action' => 'add', $bidinfo_id]);
+			endif;
+		elseif ($this->Auth->user('id') === $bidinfo->biditem->user_id) :
+			//case seller
+			if (empty($bidinfo->buyer_name)) :
+				//フォーム未入力
+				$msg = '落札者による発送先情報をおまちください';
+			elseif (!$bidinfo->is_sent) :
+				$msg = "商品発送後発送連絡ボタンを押してください<br>
+						落札者名： $bidinfo->buyer_name <br>
+						発送先住所： $bidinfo->buyer_address <br>
+						落札者電話番号： $bidinfo->buyer_phone_number";
+			elseif (!$bidinfo->is_received) :
+				$msg = '落札者による受取確認をお待ちください';
+			else :
+				//評価画面への遷移
+				$this->Auth->setUser($this->Auth->user());
+				return $this->redirect(['controller' => 'Ratings', 'action' => 'add', $bidinfo_id]);
+			endif;
+		endif;
+		$this->set(compact('bidinfo', 'msg'));
+	}
 }
