@@ -225,9 +225,9 @@ class AuctionController extends AuctionBaseController
 				$bidinfoPatchData['buyer_address'] = $_POST['buyer_address'];
 				$bidinfoPatchData['buyer_phone_number'] = $_POST['buyer_phone_number'];
 				$bidinfo = $this->Bidinfo->patchEntity($bidinfo, $bidinfoPatchData);
-			elseif (isset($_POST['is_sent']) && $this->Auth->user('id') === $bidinfo->biditem->user_id) :
+			elseif (isset($bidinfo->buyer_name) && isset($_POST['is_sent']) && $this->Auth->user('id') === $bidinfo->biditem->user_id) :
 				$bidinfo->is_sent = 1;
-			elseif (isset($_POST['is_received']) && $this->Auth->user('id') === $bidinfo->user_id) :
+			elseif (isset($bidinfo->buyer_name) && $bidinfo->is_sent && isset($_POST['is_received']) && $this->Auth->user('id') === $bidinfo->user_id) :
 				$bidinfo->is_received = 1;
 			endif;
 			if ($this->Bidinfo->save($bidinfo)) :
