@@ -102,7 +102,7 @@ class AuctionController extends AuctionBaseController
 				// $biditemを保存する
 				if ($this->Biditems->save($biditem)) {
 					// biditem idに名前を変更し拡張子は保持する
-					$image_path = "{$biditem['id']}.{$fileExtension}";
+					$image_path = "{$biditem['id']}.{$fileExtension}";
 					$biditem['image_path'] = $image_path;
 					move_uploaded_file($_FILES['image']['tmp_name'], 'img/auction/' . $image_path);
 					if ($this->Biditems->save($biditem)) {
@@ -115,7 +115,7 @@ class AuctionController extends AuctionBaseController
 				// 失敗時のメッセージ
 				$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
 			} else {
-				$this->Flash->error(__('JPG / PNG / GIF形式でアップロードください'));
+				$this->Flash->error(__('JPG / PNG / GIF形式でアップロードください'));
 			}
 		}
 		// 値を保管
