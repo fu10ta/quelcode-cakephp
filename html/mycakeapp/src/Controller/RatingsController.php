@@ -51,11 +51,15 @@ class RatingsController extends AuctionBaseController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($bidinfo_id)
+    public function view($bidinfo_id = null)
     {
-        $bidinfo = $this->Bidinfo->get($bidinfo_id, [
-            'contain' => ['Biditems'],
-        ]);
+        try{
+            $bidinfo = $this->Bidinfo->get($bidinfo_id, [
+                'contain' => ['Biditems'],
+            ]);
+        }catch (Exception $e){
+            return $this->redirect(['action' => 'index']);
+        }
 
         //ログインユーザーの認証
         if ($this->Auth->user('id') !== $bidinfo->user_id && $this->Auth->user('id') !== $bidinfo->biditem->user_id) {
@@ -92,12 +96,15 @@ class RatingsController extends AuctionBaseController
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
 
-    public function add($bidinfo_id)
+    public function add($bidinfo_id = null)
     {
-
-        $bidinfo = $this->Bidinfo->get($bidinfo_id, [
-            'contain' => ['Biditems'],
-        ]);
+        try{
+            $bidinfo = $this->Bidinfo->get($bidinfo_id, [
+                'contain' => ['Biditems'],
+            ]);
+        }catch(Exception $e){
+            return $this->redirect(['action' => 'index']);
+        }
 
         //ログインユーザーの認証
         if ($this->Auth->user('id') !== $bidinfo->user_id && $this->Auth->user('id') !== $bidinfo->biditem->user_id) {

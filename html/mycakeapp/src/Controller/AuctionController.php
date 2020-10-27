@@ -206,12 +206,16 @@ class AuctionController extends AuctionBaseController
 	}
 
 	//発送・受取連絡の表示
-	public function personalInfo($bidinfo_id)
+	public function personalInfo($bidinfo_id = null)
 	{
-		//取引情報の取得
-		$bidinfo = $this->Bidinfo->get($bidinfo_id, [
-			'contain' => ['Biditems']
-		]);
+		try{
+			//取引情報の取得
+			$bidinfo = $this->Bidinfo->get($bidinfo_id, [
+				'contain' => ['Biditems']
+			]);
+		}catch(Exception $e){
+			return $this->redirect(['action' => 'index']);
+		}
 
 		//ログインユーザーの認証
 		if ($this->Auth->user('id') !== $bidinfo->user_id && $this->Auth->user('id') !== $bidinfo->biditem->user_id) {
