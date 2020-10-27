@@ -112,7 +112,7 @@ class RatingsController extends AuctionBaseController
         $rating = $this->Ratings->newEntity();
 
         //評価状況に応じて条件分岐
-        if ($bidinfo->seller_rated && $bidinfo->buyer_rated) :
+        if ($bidinfo->is_seller_rated && $bidinfo->is_buyer_rated) :
             //双方評価済
             return $this->redirect(['action' => 'view', $bidinfo_id]);
         elseif ($this->request->is('post')) :
