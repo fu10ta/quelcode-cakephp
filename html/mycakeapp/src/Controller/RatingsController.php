@@ -59,8 +59,6 @@ class RatingsController extends AuctionBaseController
 
         //ログインユーザーの認証
         if ($this->Auth->user('id') !== $bidinfo->user_id && $this->Auth->user('id') !== $bidinfo->biditem->user_id) {
-            echo 'hoge';
-            exit();
             return $this->redirect(['controller' => 'Auction', 'action' => 'index']);
         }
 
@@ -103,7 +101,6 @@ class RatingsController extends AuctionBaseController
 
         //ログインユーザーの認証
         if ($this->Auth->user('id') !== $bidinfo->user_id && $this->Auth->user('id') !== $bidinfo->biditem->user_id) {
-            echo 'hogehoge';
             return $this->redirect(['controller' => 'Auction', 'action' => 'index']);
         }
 
