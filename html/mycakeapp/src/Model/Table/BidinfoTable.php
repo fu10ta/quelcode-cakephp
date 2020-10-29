@@ -95,7 +95,7 @@ class BidinfoTable extends Table
             ->allowEmptyString('buyer_phone_number', 'create')
             ->notEmptyString('buyer_phone_number', 'update')
             ->requirePresence('buyer_phone_number', 'update')
-            ->regex('buyer_phone_number', '/^[0][0-9\-]{10,12}/', '半角数字とハイフンのみで入力してください')
+            ->regex('buyer_phone_number', '/^[0][0-9\-]{10,12}/', '半角数字とハイフンのみで0から始まる10文字以上13文字以内の電話番号を入力してください')
             ->minLength('buyer_phone_number', 10, '半角数字とハイフンのみで0から始まる10文字以上13文字以内の電話番号を入力してください')
             ->maxLength('buyer_phone_number', 13, '半角数字とハイフンのみで0から始まる10文字以上13文字以内の電話番号を入力してください');
 
