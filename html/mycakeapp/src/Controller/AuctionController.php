@@ -43,10 +43,14 @@ class AuctionController extends AuctionBaseController
 	// 商品情報の表示
 	public function view($id = null)
 	{
-		// $idのBiditemを取得
-		$biditem = $this->Biditems->get($id, [
-			'contain' => ['Users', 'Bidinfo', 'Bidinfo.Users']
-		]);
+		try{
+			// $idのBiditemを取得
+			$biditem = $this->Biditems->get($id, [
+				'contain' => ['Users', 'Bidinfo', 'Bidinfo.Users']
+			]);
+		}catch(Exception $e){
+			return $this->redirect(['action' => 'index']);
+		}
 		// オークション終了時の処理
 		if ($biditem->endtime < new \DateTime('now') and $biditem->finished == 0) {
 			// finishedを1に変更して保存
