@@ -2,7 +2,7 @@
 
 use Migrations\AbstractMigration;
 
-class CreateBiditems extends AbstractMigration
+class CreateRatings extends AbstractMigration
 {
     /**
      * Change Method.
@@ -13,37 +13,35 @@ class CreateBiditems extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('biditems');
-        $table->addColumn('user_id', 'integer', [
+        $table = $this->table('ratings');
+        $table->addColumn('bidinfo_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('name', 'string', [
+        $table->addColumn('target_id', 'integer', [
             'default' => null,
-            'limit' => 100,
+            'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('detail', 'string', [
+        $table->addColumn('scorer_id', 'integer', [
+            'default' => null,
+            'limit' => 11,
+            'null' => false,
+        ]);
+        $table->addColumn('rating', 'decimal', [
+            'default' => null,
+            'null' => false,
+            'precision' => 1,
+            'scale' => 0,
+        ]);
+        $table->addColumn('comment', 'string', [
             'default' => null,
             'limit' => 1000,
             'null' => false,
         ]);
-        $table->addColumn('image_path', 'string', [
-            'default' => null,
-            'limit' => 100,
-            'null' => false,
-        ]);
-        $table->addColumn('finished', 'boolean', [
-            'default' => null,
-            'null' => false,
-        ]);
-        $table->addColumn('endtime', 'datetime', [
-            'default' => null,
-            'null' => false,
-        ]);
         $table->addColumn('created', 'datetime', [
-            'default' => null,
+            'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
         ]);
         $table->create();

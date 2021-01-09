@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Biditem $biditem
@@ -12,7 +13,7 @@
                 ['action' => 'delete', $biditem->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $biditem->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Biditems'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
@@ -27,10 +28,10 @@
     <fieldset>
         <legend><?= __('Edit Biditem') ?></legend>
         <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('name');
-            echo $this->Form->control('finished');
-            echo $this->Form->control('endtime');
+        echo $this->Form->control('user_id', ['options' => $users]);
+        echo $this->Form->control('name');
+        echo $this->Form->control('finished');
+        echo $this->Form->control('endtime');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

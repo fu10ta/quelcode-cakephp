@@ -5,20 +5,21 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Biditem Entity
+ * Rating Entity
  *
  * @property int $id
- * @property int $user_id
- * @property string $name
- * @property bool $finished
- * @property \Cake\I18n\Time $endtime
+ * @property int $bidinfo_id
+ * @property int $target_id
+ * @property int $scorer_id
+ * @property float $rating
+ * @property string $comment
  * @property \Cake\I18n\Time $created
  *
- * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Bidinfo[] $bidinfo
- * @property \App\Model\Entity\Bidrequest[] $bidrequests
+ * @property \App\Model\Entity\Bidinfo $bidinfo
+ * @property \App\Model\Entity\Target $target
+ * @property \App\Model\Entity\Scorer $scorer
  */
-class Biditem extends Entity
+class Rating extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -30,14 +31,12 @@ class Biditem extends Entity
      * @var array
      */
     protected $_accessible = [
-        'user_id' => true,
-        'name' => true,
-        'detail' => true,
-        'finished' => true,
-        'endtime' => true,
+        'bidinfo_id' => true,
+        'target_id' => true,
+        'scorer_id' => true,
+        'rating' => true,
+        'comment' => true,
         'created' => true,
-        'user' => true,
         'bidinfo' => true,
-        'bidrequests' => true,
     ];
 }
